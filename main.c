@@ -1,6 +1,12 @@
-#include <stdio.h>
+#include <stdlib.h>
+#include "methods.h"
 
-int main() {
-    printf("Hello, World!\n");
-    return 0;
+int main(int argc, char * argv[]) {
+    // Initialization
+    int * bitmap = createBitMap();
+    unsigned int * bitmasks = createBitMasks();
+
+
+    free(bitmasks);
+    free(bitmap);
 }
