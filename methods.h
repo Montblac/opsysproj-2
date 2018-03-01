@@ -7,7 +7,7 @@
 
 // Initialization
 int * createBitMap();
-unsigned int * createBitMasks();
+int * createBitMasks();
 int * createPhysicalMem();
 
 // Input-checking;
