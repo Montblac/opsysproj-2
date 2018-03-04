@@ -28,7 +28,7 @@ int main(int argc, char * argv[]) {
     //pathtemp = strtok(input, " \n");
     //initfile = fopen(pathtemp, "r");
 
-    const char * testpath = "/Users/Sam/Desktop/sample-input1.txt";
+    const char * testpath = "sample-input1.txt";
     initfile = fopen(testpath, "r");
 
     if(initfile == NULL){
@@ -62,7 +62,7 @@ int main(int argc, char * argv[]) {
     // Initialization process is done and file no longer needed
     fclose(initfile);
 
-    const char * testpath2 = "/Users/Sam/Desktop/sample-input2.txt";
+    const char * testpath2 = "sample-input2.txt";
     inputfile = fopen(testpath2, "r");
 
     if(inputfile == NULL){
