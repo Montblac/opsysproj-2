@@ -3,4 +3,4 @@ project(CS143B_Project2 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(CS143B_Project2 main.c structures.h methods.h methods.c test.c macros.h)
+add_executable(CS143B_Project2 main.c methods.h methods.c test.c macros.h)
