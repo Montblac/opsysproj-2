@@ -44,6 +44,20 @@ void setBit0(int addr, int * bitmap, const int * masks){
 }
 
 
+// Debugging
+void printBitmap(int * bm){
+    for(int i = 0; i < MAPSIZE; ++i){
+        printf("%d ", bm[i]);
+    }
+    printf("\n");
+}
+void printMemory(int start, int end, int * pmem){
+    for(int i = start; i < end; ++i){
+        printf("%d ", pmem[i]);
+    }
+    printf("\n");
+}
+
 // Input-checking
 int isWord(const char * input){
     if(input == NULL) {
