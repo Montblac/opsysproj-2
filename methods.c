@@ -52,6 +52,16 @@ int getW(int addr){
     return addr & W_BITS;
 }
 
+// Search
+int findEmptyFrame(const int * bitmap){
+    for(int i = 1; i < MAPSIZE; ++i){
+        if(bitmap[i] == 0){
+            return i;
+        }
+    }
+    return -1;
+}
+
 // Debugging
 void printBitmap(int * bm){
     for(int i = 0; i < MAPSIZE; ++i){

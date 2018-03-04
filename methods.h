@@ -21,6 +21,9 @@ int getS(int addr);
 int getP(int addr);
 int getW(int addr);
 
+// Search
+int findEmptyFrame(const int * bitmap);
+
 // Debugging
 void printBitmap(int * bm);
 void printMemory(int start, int end, int * pmem);
