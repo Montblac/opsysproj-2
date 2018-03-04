@@ -21,11 +21,4 @@ void setBit0(int addr, int * bitmap, const int * masks);
 void printBitmap(int * bm);
 void printMemory(int start, int end, int * pmem);
 
-// Input-checking;
-int isWord(const char * input);
-int isNumber(const char * input);
-int isValidName(const char * name);
-
-
-
 #endif //CS143B_PROJECT2_METHODS_H

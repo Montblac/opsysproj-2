@@ -57,35 +57,3 @@ void printMemory(int start, int end, int * pmem){
     }
     printf("\n");
 }
-
-// Input-checking
-int isWord(const char * input){
-    if(input == NULL) {
-        return 0;
-    }
-    for (int i = 0; i < strlen(input); ++i) {
-        if (!isalpha(input[i])) {
-            return 0;
-        }
-    }
-    return 1;
-}
-int isNumber(const char * input){
-    if(input == NULL){
-        return 0;
-    }
-    for(int i = 0; i < strlen(input); ++i){
-        if(!isdigit(input[i])){
-            return 0;
-        }
-    }
-    return 1;
-}
-int isValidName(const char * name){
-    if(name == NULL){return 0;}
-    int size = 0;
-    while(name[size] != NULL){
-        ++size;
-    }
-    return size == 1 ? 1 : 0;
-}
