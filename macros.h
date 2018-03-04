@@ -7,5 +7,6 @@
 
 #define MEMSIZE 524288
 #define MAPSIZE 32
+#define FRAMESIZE 512
 
 #endif //CS143B_PROJECT2_MACROS_H
