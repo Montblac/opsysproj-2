@@ -10,6 +10,13 @@ int * createBitMap();
 int * createBitMasks();
 int * createPhysicalMem();
 
+// Accessor
+int getFrame(int addr);
+
+// Mutator
+void setBit1(int addr, int * bitmap, const int * masks);
+void setBit0(int addr, int * bitmap, const int * masks);
+
 // Input-checking;
 int isWord(const char * input);
 int isNumber(const char * input);

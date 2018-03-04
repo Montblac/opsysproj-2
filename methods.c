@@ -25,6 +25,25 @@ int * createPhysicalMem(){
     return calloc(MEMSIZE, sizeof(int));
 }
 
+// Accessors
+int getFrame(int addr){
+    return addr / FRAMESIZE;
+}
+
+// Mutator
+void setBit1(int addr, int * bitmap, const int * masks){
+    int frame = addr / FRAMESIZE;
+    int index = addr % FRAMESIZE;
+    bitmap[frame] = bitmap[frame] | masks[index];
+}
+void setBit0(int addr, int * bitmap, const int * masks){
+    int frame = addr / FRAMESIZE;
+    int index = addr % FRAMESIZE;
+    int mask2 = ~masks[index];
+    bitmap[frame] = bitmap[frame] && mask2;
+}
+
+
 // Input-checking
 int isWord(const char * input){
     if(input == NULL) {
