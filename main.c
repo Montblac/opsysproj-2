@@ -9,6 +9,7 @@ int main(int argc, char * argv[]) {
     // Variable Declaration
     FILE * initfile;
     FILE * inputfile;
+    FILE * outfile;
 
     size_t size;
     ssize_t inputsize;
@@ -62,6 +63,17 @@ int main(int argc, char * argv[]) {
     // Initialization process is done and file no longer needed
     fclose(initfile);
 
+    // REMOVED FOR TESTING PURPOSES
+    //printf("Input File Path: ");
+    //inputsize = getline(&input, &size, stdin);
+    //pathtemp = strtok(input, " \n");
+    //inputfile = fopen(pathtemp, "r");
+
+    //printf("Output File Path: ");
+    //inputsize = getline(&input, &size, stdin);
+    //pathtemp = strtok(input, " \n");
+    //outfile = fopen(pathtemp, "r");
+
     const char * testpath2 = "sample-input2.txt";
     inputfile = fopen(testpath2, "r");
 
@@ -76,15 +88,19 @@ int main(int argc, char * argv[]) {
             int op, va, n;
             for (char const *line = input; sscanf(line, "%d %d %n", &op, &va, &n) == 2; line += n) {
                 printf("Operation: %d, Address: %d\n", op, va);
+                printf("Seg: %d   Pt: %d   Off: %d   \n", getS(va), getP(va), getW(va));
 
             }
         }
     }
 
     fclose(inputfile);
+    //fclose(outfile);
 
     //printBitmap(bitmap);
     //printMemory(2000, 3000, pmem);
+
+
 
     free(input);
     free(masks);
