@@ -86,7 +86,7 @@ int main(int argc, char * argv[]) {
     //printBitmap(bitmap);
     //printMemory(2000, 3000, pmem);
 
-
+    free(input);
     free(masks);
     free(bitmap);
     free(pmem);
