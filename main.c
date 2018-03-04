@@ -28,7 +28,7 @@ int main(int argc, char * argv[]) {
     //pathtemp = strtok(input, " \n");
     //initfile = fopen(pathtemp, "r");
 
-    const char * testpath = "/Users/Sam/Desktop/test.txt";
+    const char * testpath = "/Users/Sam/Desktop/sample-input1.txt";
     initfile = fopen(testpath, "r");
 
     if(initfile == NULL){
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
                 setBit1(s, bitmap, masks);
             }
         }
-        // Store addr of page p from seg s in page table
+        // Store address of page p from seg s in page table
         inputsize = getline(&input, &size, initfile);
         if (inputsize == -1) {
             printf("ERROR: Empty line\n");
@@ -54,18 +54,38 @@ int main(int argc, char * argv[]) {
         } else {
             int p, s, addr, n;
             for (char const *line = input; sscanf(line, " %d %d %d %n", &p, &s, &addr, &n) == 3; line += n) {
-                int pt = pmem[s];
-                pmem[pt + p] = addr;
-                setBit1(pmem[pt + p], bitmap, masks);
+                pmem[pmem[s] + p] = addr;
+                setBit1(pmem[s] + p, bitmap, masks);
             }
         }
     }
     // Initialization process is done and file no longer needed
     fclose(initfile);
 
-    for(int i = 0; i < MAPSIZE; ++i){
-        printf("%u\n", bitmap[i]);
+    const char * testpath2 = "/Users/Sam/Desktop/sample-input2.txt";
+    inputfile = fopen(testpath2, "r");
+
+    if(inputfile == NULL){
+        printf("ERROR: Invalid input file path\n");
+        return 0;
+    } else {
+        inputsize = getline(&input, &size, inputfile);
+        if (inputsize == -1) {
+            printf("ERROR: Empty line\n");
+        } else {
+            int op, va, n;
+            for (char const *line = input; sscanf(line, "%d %d %n", &op, &va, &n) == 2; line += n) {
+                printf("Operation: %d, Address: %d\n", op, va);
+
+            }
+        }
     }
+
+    fclose(inputfile);
+
+    //printBitmap(bitmap);
+    //printMemory(2000, 3000, pmem);
+
 
     free(masks);
     free(bitmap);
