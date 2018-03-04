@@ -13,15 +13,12 @@ int main(int argc, char * argv[]) {
     size_t size;
     ssize_t inputsize;
     char * input = NULL;
-    char * value1 = NULL;
-    char * value2 = NULL;
-    char * value3 = NULL;
     char * pathtemp;
 
     // Initialize bit map, bit masks, physical memory
     int * bitmap = createBitMap();
-    unsigned int * masks = createBitMasks();
-    int * pmem = createPhysicalMem();
+    int * masks  = createBitMasks();
+    int * pmem   = createPhysicalMem();
 
     // Initialize page tables and pages
 
@@ -46,6 +43,9 @@ int main(int argc, char * argv[]) {
             int s, pt, n;
             for (char const *line = input; sscanf(line, "%d %d %n", &s, &pt, &n) == 2; line += n) {
                 pmem[s] = pt;
+                setBit1(s, bitmap, masks);
+                setBit1(pt, bitmap, masks);
+                setBit1(pt + 1, bitmap, masks);
             }
         }
         // Store pages p from segment s in the appropriate address addr
@@ -63,6 +63,9 @@ int main(int argc, char * argv[]) {
     // Initialization process is done and file no longer needed
     fclose(initfile);
 
+    for(int i = 0; i < MAPSIZE; ++i){
+        printf("%u\n", bitmap[i]);
+    }
 
     free(masks);
     free(bitmap);
