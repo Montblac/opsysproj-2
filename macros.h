@@ -10,5 +10,8 @@
 #define FRAMESIZE 512
 #define READ 0
 #define WRITE 1
+#define S_BITS 267911168
+#define P_BITS 523776
+#define W_BITS 511
 
 #endif //CS143B_PROJECT2_MACROS_H
