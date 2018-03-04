@@ -76,6 +76,8 @@ int main(int argc, char * argv[]) {
 
     const char * testpath2 = "sample-input2.txt";
     inputfile = fopen(testpath2, "r");
+    const char * testpath3 = "test_result.txt";
+    outfile = fopen(testpath3, "w+");
 
     if(inputfile == NULL){
         printf("ERROR: Invalid input file path\n");
@@ -87,15 +89,36 @@ int main(int argc, char * argv[]) {
         } else {
             int op, va, n;
             for (char const *line = input; sscanf(line, "%d %d %n", &op, &va, &n) == 2; line += n) {
-                printf("Operation: %d, Address: %d\n", op, va);
-                printf("Seg: %d   Pt: %d   Off: %d   \n", getS(va), getP(va), getW(va));
+                int s = getS(va);
+                int p = getP(va);
+                int w = getW(va);
+
+                if(op == READ){
+                    if(pmem[s] == -1 || pmem[pmem[s] + p] == -1){
+                        fputs("pf ", outfile);
+                    } else if (pmem[s] == 0 || pmem[pmem[s] + p] == 0){
+                        fputs("err ", outfile);
+                    } else {
+                        fprintf(outfile, "%d ", pmem[pmem[s] + p] + w);
+                    }
+                } else if (op == WRITE){
+                    if(pmem[s] == -1 || pmem[pmem[s] + p] == -1){
+                        fputs("pf ", outfile);
+                    } else if (pmem[s] == 0){
+                        // # TODO
+                        // Create new pt, page
+                    } else {
+                        fprintf(outfile, "%d ", pmem[pmem[s] + p] + w);
+                    }
+                }
+                //printf("%d | %d | %d | %d | %d \n", va, s, p , w, pmem[pmem[s] + p] + w);
 
             }
         }
     }
 
     fclose(inputfile);
-    //fclose(outfile);
+    fclose(outfile);
 
     //printBitmap(bitmap);
     //printMemory(2000, 3000, pmem);
