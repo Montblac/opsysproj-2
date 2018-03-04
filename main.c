@@ -44,11 +44,9 @@ int main(int argc, char * argv[]) {
             for (char const *line = input; sscanf(line, "%d %d %n", &s, &pt, &n) == 2; line += n) {
                 pmem[s] = pt;
                 setBit1(s, bitmap, masks);
-                setBit1(pt, bitmap, masks);
-                setBit1(pt + 1, bitmap, masks);
             }
         }
-        // Store pages p from segment s in the appropriate address addr
+        // Store addr of page p from seg s in page table
         inputsize = getline(&input, &size, initfile);
         if (inputsize == -1) {
             printf("ERROR: Empty line\n");
@@ -56,7 +54,9 @@ int main(int argc, char * argv[]) {
         } else {
             int p, s, addr, n;
             for (char const *line = input; sscanf(line, " %d %d %d %n", &p, &s, &addr, &n) == 3; line += n) {
-                pmem[pmem[s] + p] = addr;
+                int pt = pmem[s];
+                pmem[pt + p] = addr;
+                setBit1(pmem[pt + p], bitmap, masks);
             }
         }
     }
