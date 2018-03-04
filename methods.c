@@ -9,6 +9,9 @@
 
 #include "macros.h"
 
+
+// Utility
+
 // Initialization
 int * createBitMap(){
     return calloc(MAPSIZE, sizeof(int));
@@ -25,11 +28,6 @@ int * createPhysicalMem(){
     return calloc(MEMSIZE, sizeof(int));
 }
 
-// Accessors
-int getFrame(int addr){
-    return addr / FRAMESIZE;
-}
-
 // Mutator
 void setBit1(int addr, int * bitmap, const int * masks){
     int frame = addr / FRAMESIZE;
@@ -40,9 +38,19 @@ void setBit0(int addr, int * bitmap, const int * masks){
     int frame = addr / FRAMESIZE;
     int index = addr % FRAMESIZE;
     int mask2 = ~masks[index];
-    bitmap[frame] = bitmap[frame] && mask2;
+    bitmap[frame] = bitmap[frame] & mask2;
 }
 
+// Translation
+int getS(int addr){
+    return (addr & S_BITS) >> 19;
+}
+int getP(int addr){
+    return (addr & P_BITS) >> 9;
+}
+int getW(int addr){
+    return addr & W_BITS;
+}
 
 // Debugging
 void printBitmap(int * bm){

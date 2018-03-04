@@ -5,17 +5,21 @@
 #ifndef CS143B_PROJECT2_METHODS_H
 #define CS143B_PROJECT2_METHODS_H
 
+// Utility
+
 // Initialization
 int * createBitMap();
 int * createBitMasks();
 int * createPhysicalMem();
 
-// Accessor
-int getFrame(int addr);
-
 // Mutator
 void setBit1(int addr, int * bitmap, const int * masks);
 void setBit0(int addr, int * bitmap, const int * masks);
+
+// Translation
+int getS(int addr);
+int getP(int addr);
+int getW(int addr);
 
 // Debugging
 void printBitmap(int * bm);
