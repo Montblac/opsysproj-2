@@ -89,4 +89,5 @@ int main(int argc, char * argv[]) {
 
     free(masks);
     free(bitmap);
+    free(pmem);
 }
