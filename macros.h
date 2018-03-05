@@ -13,5 +13,6 @@
 #define S_BITS 267911168
 #define P_BITS 523776
 #define W_BITS 511
+#define SP_BITS 268434944
 
 #endif //CS143B_PROJECT2_MACROS_H
