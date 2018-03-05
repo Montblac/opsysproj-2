@@ -22,7 +22,8 @@ int getP(int addr);
 int getW(int addr);
 
 // Search
-int findEmptyFrame(const int * bitmap);
+int findEmptyFrame(int start, const int * bitmap);
+int findEmptyPT(const int * pmem);
 
 // Debugging
 void printBitmap(int * bm);

@@ -4,9 +4,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <memory.h>
-
 #include "macros.h"
 
 
@@ -52,11 +49,24 @@ int getW(int addr){
     return addr & W_BITS;
 }
 
+
 // Search
-int findEmptyFrame(const int * bitmap){
-    for(int i = 1; i < MAPSIZE; ++i){
+int findEmptyFrame(int start, const int * bitmap){
+    for(int i = start; i < MAPSIZE; ++i){
         if(bitmap[i] == 0){
             return i;
+        }
+    }
+    return -1;
+}
+int findEmptyPT(const int * bitmap){
+    int offset = 1;
+    for(int i = offset; i < MAPSIZE; i += offset){
+        int idx = findEmptyFrame(i, bitmap);
+        if(idx > 0 && idx < MAPSIZE - 1 && bitmap[idx + 1] == 0){
+            return idx;
+        } else {
+            offset = idx + 1;
         }
     }
     return -1;
