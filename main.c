@@ -22,10 +22,9 @@ int main(int argc, char * argv[]) {
     int tlb[4][3] = {0};
 
     // Initialize TLB
-    tlb[0][0] = 0;
-    tlb[1][0] = 1;
-    tlb[2][0] = 2;
-    tlb[3][0] = 3;
+    for(int i = 0; i < 4; ++i){
+        tlb[i][0] = i;
+    }
 
     // Initialize page tables and pages
 
@@ -158,7 +157,7 @@ int main(int argc, char * argv[]) {
 
     //printBitmap(bitmap);
     //printMemory(2000, 3000, pmem);
-    //printTLB(tlb);
+    printTLB(tlb);
 
 
 
