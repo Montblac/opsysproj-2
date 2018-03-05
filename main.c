@@ -93,6 +93,7 @@ int main(int argc, char * argv[]) {
             int op, va, n;
             for (char const *line = input; sscanf(line, "%d %d %n", &op, &va, &n) == 2; line += n) {
 
+                // TODO: Implement TLB
 
                 int s = getS(va);
                 int p = getP(va);

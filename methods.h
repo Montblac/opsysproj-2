@@ -20,6 +20,7 @@ void setBit0(int addr, int * bitmap, const int * masks);
 int getS(int addr);
 int getP(int addr);
 int getW(int addr);
+int getSP(int addr);
 
 // Search
 int findEmptyFrame(int start, const int * bitmap);

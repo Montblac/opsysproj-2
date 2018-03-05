@@ -48,6 +48,9 @@ int getP(int addr){
 int getW(int addr){
     return addr & W_BITS;
 }
+int getSP(int addr){
+    return (addr & SP_BITS) >> 9;
+}
 
 
 // Search
