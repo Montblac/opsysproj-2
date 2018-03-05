@@ -15,10 +15,17 @@ int main(int argc, char * argv[]) {
     char * input = NULL;
     char * pathtemp;
 
-    // Initialize bit map, bit masks, physical memory
+    // Initialize bit map, bit masks, physical memory, TLB
     int * bitmap = createBitMap();
     int * masks  = createBitMasks();
     int * pmem   = createPhysicalMem();
+    int tlb[4][3] = {0};
+
+    // Initialize TLB
+    tlb[0][0] = 0;
+    tlb[1][0] = 1;
+    tlb[2][0] = 2;
+    tlb[3][0] = 3;
 
     // Initialize page tables and pages
 
@@ -94,10 +101,12 @@ int main(int argc, char * argv[]) {
             for (char const *line = input; sscanf(line, "%d %d %n", &op, &va, &n) == 2; line += n) {
 
                 // TODO: Implement TLB
+                int sp = getSP(va);
+                int w = getW(va);
+
 
                 int s = getS(va);
                 int p = getP(va);
-                int w = getW(va);
 
                 if(op == READ){
                     if(pmem[s] == -1 || pmem[pmem[s] + p] == -1){
@@ -108,7 +117,6 @@ int main(int argc, char * argv[]) {
                         fprintf(outfile, "%d ", pmem[pmem[s] + p] + w);
                     }
                 } else if (op == WRITE){
-                    printf("SEGMENT: %d PT: %d OFFSET: %d\n", s, p, w);
                     if(pmem[s] == -1 || pmem[pmem[s] + p] == -1){
                         fputs("pf ", outfile);
                     } else if (pmem[s] == 0) {
@@ -150,6 +158,7 @@ int main(int argc, char * argv[]) {
 
     //printBitmap(bitmap);
     //printMemory(2000, 3000, pmem);
+    //printTLB(tlb);
 
 
 

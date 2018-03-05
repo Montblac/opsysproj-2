@@ -29,5 +29,6 @@ int findEmptyPT(const int * pmem);
 // Debugging
 void printBitmap(int * bm);
 void printMemory(int start, int end, int * pmem);
+void printTLB(int tlb[4][3]);
 
 #endif //CS143B_PROJECT2_METHODS_H

@@ -88,3 +88,11 @@ void printMemory(int start, int end, int * pmem){
     }
     printf("\n");
 }
+void printTLB(int tlb[4][3]){
+    for(int i = 0; i < 4; ++i){
+        for(int j = 0; j < 3; ++j){
+            printf("%d ", tlb[i][j]);
+        }
+        printf("\n");
+    }
+}
