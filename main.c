@@ -101,7 +101,6 @@ int main(int argc, char * argv[]) {
                 int s = getS(va);
                 int p = getP(va);
 
-                // TODO: Fix physical memory addresses that are wrong
                 if(op == READ){
                     if(pmem[s] == -1 || pmem[pmem[s] + p] == -1){
                         fputs("pf ", outfile);
@@ -114,19 +113,22 @@ int main(int argc, char * argv[]) {
                     if(pmem[s] == -1 || pmem[pmem[s] + p] == -1){
                         fputs("pf ", outfile);
                     } else if (pmem[s] == 0) {
-                        int new_pg = findEmptyFrame(1, bitmap);
-                        int new_pt = findEmptyPT(pmem);
-                        if (new_pg > 0 && new_pt > 0) {
+
+                        int new_pt = findEmptyPT(bitmap);
+                        if(new_pt > 0){
                             int pt_addr = new_pt * FRAMESIZE;
-                            int pg_addr = new_pg * FRAMESIZE;
-                            setBit1(pg_addr, bitmap, masks);
                             setBit1(pt_addr, bitmap, masks);
                             setBit1(pt_addr + FRAMESIZE, bitmap, masks);
                             pmem[s] = pt_addr;
-                            pmem[pmem[s] + p] = pg_addr;
-                            fprintf(outfile, "%d ", pmem[pmem[s] + p] + w);
+                            int new_pg = findEmptyFrame(1, bitmap);
+                            if(new_pg > 0){
+                                int pg_addr = new_pg * FRAMESIZE;
+                                setBit1(pg_addr, bitmap, masks);
+                                pmem[pmem[s] + p] = pg_addr;
+                                fprintf(outfile, "%d ", pmem[pmem[s] + p] + w);
+                            }
                         }
-                    }else if (pmem[pmem[s] + p] == 0){
+                    } else if (pmem[pmem[s] + p] == 0){
                         int new_pg = findEmptyFrame(1, bitmap);
                         if(new_pg > 0){
                             int pg_addr = new_pg * FRAMESIZE;
@@ -258,28 +260,29 @@ int main(int argc, char * argv[]) {
                     if(pmem[s] == -1 || pmem[pmem[s] + p] == -1){
                         fputs("m pf ", outfile);
                     } else if (pmem[s] == 0) {
-                        int new_pg = findEmptyFrame(1, bitmap);
-                        int new_pt = findEmptyPT(pmem);
-                        if (new_pg > 0 && new_pt > 0) {
+                        int new_pt = findEmptyPT(bitmap);
+                        if(new_pt > 0){
                             int pt_addr = new_pt * FRAMESIZE;
-                            int pg_addr = new_pg * FRAMESIZE;
-                            setBit1(pg_addr, bitmap, masks);
                             setBit1(pt_addr, bitmap, masks);
                             setBit1(pt_addr + FRAMESIZE, bitmap, masks);
                             pmem[s] = pt_addr;
-                            pmem[pmem[s] + p] = pg_addr;
+                            int new_pg = findEmptyFrame(1, bitmap);
+                            if(new_pg > 0){
+                                int pg_addr = new_pg * FRAMESIZE;
+                                setBit1(pg_addr, bitmap, masks);
+                                pmem[pmem[s] + p] = pg_addr;
 
-                            for (int i = 0; i < 4; ++i) {
-                                if (tlb[i][0] == 0) {
-                                    tlb[i][0] = 3;
-                                    tlb[i][1] = sp;
-                                    tlb[i][2] = pmem[pmem[s] + p];
-                                } else {
-                                    --tlb[i][0];
+                                for (int i = 0; i < 4; ++i) {
+                                    if (tlb[i][0] == 0) {
+                                        tlb[i][0] = 3;
+                                        tlb[i][1] = sp;
+                                        tlb[i][2] = pmem[pmem[s] + p];
+                                    } else {
+                                        --tlb[i][0];
+                                    }
                                 }
+                                fprintf(outfile2, "m %d ", pmem[pmem[s] + p] + w);
                             }
-
-                            fprintf(outfile2, "m %d ", pmem[pmem[s] + p] + w);
                         }
                     } else if (pmem[pmem[s] + p] == 0){
                         int new_pg = findEmptyFrame(1, bitmap);
