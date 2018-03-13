@@ -320,9 +320,9 @@ int main(int argc, char * argv[]) {
             }
         }
     }
-    //printBitmap(bitmap);
-    //printMemory(2000, 3000, pmem);
-    //printTLB(tlb);
+    fclose(initfile);
+    fclose(inputfile);
+    fclose(outfile2);
 
     free(input);
     free(masks);
