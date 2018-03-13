@@ -9,6 +9,7 @@
 
 // Utility
 
+
 // Initialization
 int * createBitMap(){
     return calloc(MAPSIZE, sizeof(int));
@@ -23,6 +24,11 @@ int * createBitMasks(){
 }
 int * createPhysicalMem(){
     return calloc(MEMSIZE, sizeof(int));
+}
+void init(int ** bm, int ** bms, int ** pm){
+    *bm = createBitMap();
+    *bms = createBitMasks();
+    *pm = createPhysicalMem();
 }
 
 // Mutator

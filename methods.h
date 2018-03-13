@@ -11,6 +11,7 @@
 int * createBitMap();
 int * createBitMasks();
 int * createPhysicalMem();
+void init(int ** bm, int ** bms, int ** pm);
 
 // Mutator
 void setBit1(int addr, int * bitmap, const int * masks);
