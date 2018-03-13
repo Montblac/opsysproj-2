@@ -20,37 +20,38 @@ int main(int argc, char * argv[]) {
     init(&bitmap, &masks, &pmem);
 
     // Initialize page tables and pages
+    printf("Init File Path: ");
+    inputsize = getline(&input, &size, stdin);
+    pathtemp = strtok(input, " \n");
+    initfile = fopen(pathtemp, "r");
 
-    // ## REMOVED FOR TESTING PURPOSES
-    //printf("Init File Path: ");
-    //inputsize = getline(&input, &size, stdin);
-    //pathtemp = strtok(input, " \n");
-    //initfile = fopen(pathtemp, "r");
 
-    //printf("Input File Path: ");
-    //inputsize = getline(&input, &size, stdin);
-    //pathtemp = strtok(input, " \n");
-    //inputfile = fopen(pathtemp, "r");
+    printf("Input File Path: ");
+    inputsize = getline(&input, &size, stdin);
+    pathtemp = strtok(input, " \n");
+    inputfile = fopen(pathtemp, "r");
 
-    //printf("Non-TLB Output File Path: ");
-    //inputsize = getline(&input, &size, stdin);
-    //pathtemp = strtok(input, " \n");
-    //outfile = fopen(pathtemp, "r");
 
-    //printf("TLB Output File Path: ");
-    //inputsize = getline(&input, &size, stdin);
-    //pathtemp = strtok(input, " \n");
-    //outfile2 = fopen(pathtemp, "r");
+    printf("Non-TLB Output File Path: ");
+    inputsize = getline(&input, &size, stdin);
+    pathtemp = strtok(input, " \n");
+    outfile = fopen(pathtemp, "w+");
+
+    printf("TLB Output File Path: ");
+    inputsize = getline(&input, &size, stdin);
+    pathtemp = strtok(input, " \n");
+    outfile2 = fopen(pathtemp, "w+");
+
 
     // ## FOR TESTING PURPOSES
-    const char * testpath = "student_test_init.txt"; //"sample-input1.txt";
-    initfile = fopen(testpath, "r");
-    const char * testpath2 = "student_test_va2.txt"; //"sample-input2.txt";
-    inputfile = fopen(testpath2, "r");
-    const char * testpath3 = "54565096.txt";
-    outfile = fopen(testpath3, "w+");
-    const char * testpath4 = "54565096_tlb.txt";
-    outfile2 = fopen(testpath4, "w+");
+//    const char * testpath = "student_test_init.txt"; //"sample-input1.txt";
+//    initfile = fopen(testpath, "r");
+//    const char * testpath2 = "student_test_va2.txt"; //"sample-input2.txt";
+//    inputfile = fopen(testpath2, "r");
+//    const char * testpath3 = "54565096.txt";
+//    outfile = fopen(testpath3, "w+");
+//    const char * testpath4 = "54565096_tlb.txt";
+//    outfile2 = fopen(testpath4, "w+");
 
 
     if(initfile == NULL){
