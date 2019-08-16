@@ -1,13 +1,6 @@
-//
-// Created by Sam Leyva on 2/26/18.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "macros.h"
-
-
-// Utility
 
 
 // Initialization
