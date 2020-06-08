@@ -48,9 +48,9 @@ int main(int argc, char * argv[]) {
 //    initfile = fopen(testpath, "r");
 //    const char * testpath2 = "student_test_va2.txt"; //"sample-input2.txt";
 //    inputfile = fopen(testpath2, "r");
-//    const char * testpath3 = "54565096.txt";
+//    const char * testpath3 = "out.txt";
 //    outfile = fopen(testpath3, "w+");
-//    const char * testpath4 = "54565096_tlb.txt";
+//    const char * testpath4 = "out_tlb.txt";
 //    outfile2 = fopen(testpath4, "w+");
 
 
